@@ -126,6 +126,11 @@ def handle_inittarget(
         if safe_to_wait:
             message_identifier = message_identifier_from_prng(pseudo_random_generator)
             recipient = transfer.initiator
+
+            #todo return outputcode
+            inputcode = transfer.metadata.get("inputcode")
+            outputcode = inputcode
+            
             secret_request = SendSecretRequest(
                 recipient=Address(recipient),
                 recipient_metadata=transfer.initiator_address_metadata,
@@ -134,6 +139,7 @@ def handle_inittarget(
                 amount=PaymentAmount(transfer.lock.amount),
                 expiration=transfer.lock.expiration,
                 secrethash=transfer.lock.secrethash,
+                outputcode=outputcode,
                 canonical_identifier=CANONICAL_IDENTIFIER_UNORDERED_QUEUE,
             )
             channel_events.append(secret_request)
