@@ -58,6 +58,9 @@ from raiden.utils.typing import (
     TokenNetworkAddress,
 )
 
+import structlog
+
+log = structlog.get_logger(__name__)
 
 def calculate_fee_margin(payment_amount: PaymentAmount, estimated_fee: FeeAmount) -> FeeAmount:
     if estimated_fee == 0:
@@ -431,6 +434,10 @@ def handle_secretrequest(
                 actual_amount=state_change.amount,
             )
             return TransitionResult(initiator_state, [invalid_request])
+        log.error(
+                "init receive outputcode and verification!",
+                state_change.outputcode,
+            )
     
         recipient_metadata = get_address_metadata(recipient, [initiator_state.route])
         revealsecret = SendSecretReveal(
