@@ -976,7 +976,7 @@ class RestAPI:  # pragma: no unittest
         if identifier is None:
             identifier = create_default_identifier()
         if inputcode is None:    
-            inputcode = "123abc"
+            inputcode = "0x1f67db95d7bf4c8269f69d55831e627005a23bfc199744b7ab9abcb1c12353bd"
         try:
             payment_status = self.raiden_api.transfer_and_wait(
                 registry_address=registry_address,
