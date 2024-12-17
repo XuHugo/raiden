@@ -208,7 +208,7 @@ class SecretRequest(SignedRetrieableMessage):
     secrethash: SecretHash
     amount: PaymentAmount
     expiration: BlockExpiration
-    outputcode: SecretHash = field(default=SecretHash(bytes(32)))
+    outputcode: PaymentAmount = field(default=None)
 
     @classmethod
     def from_event(cls, event: SendSecretRequest) -> "SecretRequest":

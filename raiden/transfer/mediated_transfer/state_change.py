@@ -120,7 +120,7 @@ class ReceiveSecretRequest(AuthenticatedSenderStateChange):
     amount: PaymentAmount
     expiration: BlockExpiration = field(repr=False)
     secrethash: SecretHash
-    outputcode: SecretHash = field(default=EMPTY_SECRETHASH)
+    outputcode: PaymentAmount = field(default=None)
     revealsecret: Optional[SendSecretReveal] = field(default=None)
 
 

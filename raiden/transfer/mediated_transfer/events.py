@@ -116,7 +116,7 @@ class SendSecretRequest(SendMessageEvent):
     amount: PaymentAmount
     expiration: BlockExpiration
     secrethash: SecretHash
-    outputcode: SecretHash = field(default=EMPTY_SECRETHASH)
+    outputcode: PaymentAmount = field(default=None)
 
 
 @dataclass(frozen=True)

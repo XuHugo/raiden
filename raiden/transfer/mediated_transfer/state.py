@@ -137,7 +137,7 @@ class TransferDescriptionWithSecretState(State):
     target: TargetAddress
     secret: Secret = field(repr=False)
     secrethash: SecretHash = field(default=EMPTY_SECRETHASH)
-    inputcode: SecretHash = field(default=EMPTY_SECRETHASH)
+    inputcode: PaymentAmount = field(default=None)
     lock_timeout: Optional[BlockTimeout] = field(default=None)
 
     def __post_init__(self) -> None:

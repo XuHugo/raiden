@@ -344,7 +344,7 @@ class PaymentSchema(BaseSchema):
     identifier = IntegerToStringField(missing=None)
     secret = SecretField(missing=None)
     secret_hash = SecretHashField(missing=None)
-    inputcode = SecretHashField(missing=None)
+    inputcode = IntegerToStringField(missing=None)
     lock_timeout = IntegerToStringField(missing=None)
     paths = fields.List(fields.Nested(RouteMetadataSchema()), missing=None)
 

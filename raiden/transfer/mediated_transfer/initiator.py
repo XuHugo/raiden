@@ -426,7 +426,7 @@ def handle_secretrequest(
         # recipient_metadata = initiator_state.route.address_metadata.get(recipient, None)
 
         # todo phd: checkout output
-        if len(state_change.outputcode) != 66:
+        if state_change.outputcode >= 99:
             initiator_state.received_secret_request = True
             invalid_request = EventInvalidSecretRequest(
                 payment_identifier=state_change.payment_identifier,
