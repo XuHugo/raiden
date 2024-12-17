@@ -57,7 +57,7 @@ class SecretSerializer(SerializationBase):
             schema = class_schema(_DecryptedSecret, base_schema=BaseSchema)()
             return schema.load(deepcopy(obj))
         except (ValueError, TypeError, ValidationError, JSONDecodeError) as ex:
-            raise SerializationError(f"Can't deserialize: {data!r}") from ex
+            raise SerializationError(f"Can't deserialize bytes: {data!r}") from ex
 
 
 def encrypt_secret(

@@ -101,7 +101,7 @@ class DictSerializer(SerializationBase):
                 schema = class_schema(klass, base_schema=BaseSchema)()
                 return schema.load(deepcopy(data))
             except (ValueError, TypeError, ValidationError) as ex:
-                raise SerializationError(f"Can't deserialize: {data}") from ex
+                raise SerializationError(f"Can't deserialize dict: {data}") from ex
         return data
 
 
