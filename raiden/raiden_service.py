@@ -193,7 +193,7 @@ def initiator_init(
     transfer_secrethash: SecretHash,
     token_network_address: TokenNetworkAddress,
     target_address: TargetAddress,
-    inputcode: PaymentAmount = None,
+    inputcode: PaymentAmount,
     lock_timeout: BlockTimeout = None,
     route_states: List[RouteState] = None,
 ) -> Tuple[Optional[str], ActionInitInitiator]:
@@ -1498,7 +1498,7 @@ class RaidenService(Runnable):
         amount: PaymentAmount,
         target: TargetAddress,
         identifier: PaymentID,
-        inputcode: PaymentAmount = None,
+        inputcode: PaymentAmount,
         secret: Secret = None,
         secrethash: SecretHash = None,
         lock_timeout: BlockTimeout = None,

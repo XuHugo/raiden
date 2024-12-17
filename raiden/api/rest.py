@@ -971,12 +971,13 @@ class RestAPI:  # pragma: no unittest
             secret=secret,
             secret_hash=secret_hash,
             lock_timeout=lock_timeout,
+            inputcode = inputcode,
         )
 
         if identifier is None:
             identifier = create_default_identifier()
         if inputcode is None:    
-            inputcode = 99
+            inputcode = '99'
         try:
             payment_status = self.raiden_api.transfer_and_wait(
                 registry_address=registry_address,
