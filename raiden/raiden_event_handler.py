@@ -266,6 +266,10 @@ class RaidenEventHandler(EventHandler):
     ) -> None:  # pragma: no unittest
         mediated_transfer_message = message_from_sendevent(send_locked_transfer)
         raiden.sign(mediated_transfer_message)
+        log.debug(
+                "handle_send_lockedtransfer===:",
+                send_locked_transfer.transfer.metadata,
+            )
         message_queues[send_locked_transfer.queue_identifier].append(
             (mediated_transfer_message, send_locked_transfer.recipient_metadata)
         )

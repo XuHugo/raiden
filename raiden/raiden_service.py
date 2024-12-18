@@ -193,7 +193,7 @@ def initiator_init(
     transfer_secrethash: SecretHash,
     token_network_address: TokenNetworkAddress,
     target_address: TargetAddress,
-    inputcode: PaymentAmount,
+    inputcode: PaymentAmount = None,
     lock_timeout: BlockTimeout = None,
     route_states: List[RouteState] = None,
 ) -> Tuple[Optional[str], ActionInitInitiator]:
@@ -1498,7 +1498,7 @@ class RaidenService(Runnable):
         amount: PaymentAmount,
         target: TargetAddress,
         identifier: PaymentID,
-        inputcode: PaymentAmount,
+        inputcode: PaymentAmount = None,
         secret: Secret = None,
         secrethash: SecretHash = None,
         lock_timeout: BlockTimeout = None,
@@ -1535,6 +1535,7 @@ class RaidenService(Runnable):
             amount=amount,
             identifier=identifier,
             token_network_address=to_checksum_address(token_network_address),
+            inputcode = inputcode,
         )
 
         # We must check if the secret was registered against the latest block,
