@@ -1432,6 +1432,7 @@ def create_sendlockedtransfer(
     route_states: List[RouteState],
     recipient_metadata: AddressMetadata = None,
     previous_metadata: Dict[str, Any] = None,
+    inputcode: PaymentAmount = None,
 ) -> Tuple[SendLockedTransfer, PendingLocksState]:
     our_state = channel_state.our_state
     partner_state = channel_state.partner_state
@@ -1484,6 +1485,7 @@ def create_sendlockedtransfer(
         target=target,
         route_states=route_states,
         metadata=previous_metadata,
+        inputcode=inputcode,
     )
 
     recipient = channel_state.partner_state.address
@@ -1584,6 +1586,7 @@ def send_lockedtransfer(
     route_states: List[RouteState],
     recipient_metadata: AddressMetadata = None,
     previous_metadata: Dict[str, Any] = None,
+    inputcode: PaymentAmount = None,
 ) -> SendLockedTransfer:
     send_locked_transfer_event, pending_locks = create_sendlockedtransfer(
         channel_state=channel_state,
@@ -1598,6 +1601,7 @@ def send_lockedtransfer(
         route_states=route_states,
         recipient_metadata=recipient_metadata,
         previous_metadata=previous_metadata,
+        inputcode=inputcode,
     )
 
     transfer = send_locked_transfer_event.transfer

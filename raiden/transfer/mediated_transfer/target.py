@@ -130,9 +130,9 @@ def handle_inittarget(
             recipient = transfer.initiator
 
             #todo return outputcode
-            inputcode = transfer.metadata.get("inputcode")
+            inputcode = transfer.inputcode
             outputcode = inputcode
-            log.error(
+            log.debug(
                 "target receive inputcode and return!",
                 inputcode,
             )

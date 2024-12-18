@@ -52,4 +52,5 @@ def lockedtransfersigned_from_message(message: LockedTransferBase) -> LockedTran
         target=message.target,
         route_states=route_states,
         metadata=message.metadata.to_dict(),
+        inputcode=message.inputcode,
     )

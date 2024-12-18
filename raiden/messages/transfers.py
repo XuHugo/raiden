@@ -357,6 +357,7 @@ class LockedTransferBase(EnvelopeMessage):
     target: TargetAddress
     initiator: InitiatorAddress
     metadata: Metadata
+    inputcode: PaymentAmount = field(default=None)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -396,6 +397,7 @@ class LockedTransferBase(EnvelopeMessage):
             initiator=transfer.initiator,
             signature=EMPTY_SIGNATURE,
             metadata=Metadata.from_event(event=event),
+            inputcode=transfer.inputcode,
         )
 
     def _packed_data(self) -> bytes:

@@ -369,7 +369,9 @@ def send_lockedtransfer(
         secrethash=transfer_description.secrethash,
         route_states=route_states,
         recipient_metadata=recipient_metadata,
-        previous_metadata={"inputcode":transfer_description.inputcode},
+        #previous_metadata={"inputcode":transfer_description.inputcode},
+        previous_metadata=None,
+        inputcode=transfer_description.inputcode,
     )
     return lockedtransfer_event
 

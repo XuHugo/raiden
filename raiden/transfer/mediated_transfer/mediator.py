@@ -420,6 +420,7 @@ def forward_transfer_pair(
         route_states=payer_transfer.route_states,
         recipient_metadata=recipient_metadata,
         previous_metadata=payer_transfer.metadata,
+        inputcode=payer_transfer.inputcode,
     )
     mediated_events: List[Event] = [lockedtransfer_event]
 
