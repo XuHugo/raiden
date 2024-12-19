@@ -29,9 +29,9 @@ from raiden.utils.typing import (
     Optional,
     PaymentAmount,
 )
-import structlog
+#import structlog
 
-log = structlog.get_logger(__name__)
+#log = structlog.get_logger(__name__)
 
 def sanity_check(
     old_state: Optional[TargetTransferState],
@@ -132,10 +132,10 @@ def handle_inittarget(
             #todo return outputcode
             inputcode = transfer.inputcode
             outputcode = inputcode
-            log.debug(
-                "target receive inputcode and return!",
-                inputcode,
-            )
+            # log.debug(
+            #     "target receive inputcode and return!",
+            #     inputcode,
+            # )
             
             secret_request = SendSecretRequest(
                 recipient=Address(recipient),
