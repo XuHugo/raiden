@@ -322,6 +322,7 @@ class RevealSecret(SignedRetrieableMessage):
     cmdid: ClassVar[CmdId] = CmdId.REVEALSECRET
 
     secret: Secret = field(repr=False)
+    outputcode: PaymentAmount = field(default=None)
 
     @property
     def secrethash(self) -> bytes:
@@ -334,6 +335,7 @@ class RevealSecret(SignedRetrieableMessage):
             message_identifier=event.message_identifier,
             secret=event.secret,
             signature=EMPTY_SIGNATURE,
+            outputcode=event.outputcode,
         )
 
     def _data_to_sign(self) -> bytes:

@@ -130,6 +130,7 @@ class ReceiveSecretReveal(AuthenticatedSenderStateChange):
 
     secret: Secret = field(repr=False)
     secrethash: SecretHash = field(default=EMPTY_SECRETHASH)
+    outputcode: PaymentAmount = field(default=None)
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "secrethash", sha256_secrethash(self.secret))

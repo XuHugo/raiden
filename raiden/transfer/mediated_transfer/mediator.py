@@ -653,6 +653,7 @@ def events_for_secretreveal(
                 message_identifier=message_identifier,
                 secret=secret,
                 canonical_identifier=CANONICAL_IDENTIFIER_UNORDERED_QUEUE,
+                outputcode=pair.payee_transfer.inputcode,
             )
 
             events.append(revealsecret)

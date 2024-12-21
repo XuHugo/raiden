@@ -195,12 +195,14 @@ def handle_offchain_secretreveal(
         target_state.secret = state_change.secret
         recipient = from_hop.node_address
 
+        #todo inputcode=outputcode
         reveal = SendSecretReveal(
             recipient=recipient,
             recipient_metadata=target_state.transfer.payer_address_metadata,
             message_identifier=message_identifier,
             canonical_identifier=CANONICAL_IDENTIFIER_UNORDERED_QUEUE,
             secret=target_state.secret,
+            outputcode=state_change.outputcode,
         )
 
         iteration = TransitionResult(target_state, [reveal])

@@ -493,6 +493,12 @@ def handle_offchain_secretreveal(
         lock_expiration_threshold=lock.expiration,
     )
 
+    # todo checkout outputcode
+    if state_change.outputcode < 99:
+        events = []
+        iteration = TransitionResult(initiator_state, events)
+        return iteration
+
     if valid_reveal and is_channel_open and sent_by_partner and not expired:
         events = events_for_unlock_lock(
             initiator_state=initiator_state,
