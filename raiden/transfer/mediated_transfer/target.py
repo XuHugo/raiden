@@ -29,9 +29,9 @@ from raiden.utils.typing import (
     Optional,
     PaymentAmount,
 )
-#import structlog
+import structlog
 
-#log = structlog.get_logger(__name__)
+log = structlog.get_logger(__name__)
 
 def sanity_check(
     old_state: Optional[TargetTransferState],
@@ -196,6 +196,7 @@ def handle_offchain_secretreveal(
         recipient = from_hop.node_address
 
         #todo inputcode=outputcode
+        log.info("handle_offchain_secretreveal1===:",state_change.outputcode)
         reveal = SendSecretReveal(
             recipient=recipient,
             recipient_metadata=target_state.transfer.payer_address_metadata,
