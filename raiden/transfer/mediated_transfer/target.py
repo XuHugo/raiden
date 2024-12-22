@@ -196,7 +196,7 @@ def handle_offchain_secretreveal(
         recipient = from_hop.node_address
 
         #todo inputcode=outputcode
-        log.info("handle_offchain_secretreveal1===:",state_change.outputcode)
+        log.info("handle_offchain_secretreveal1===:",outputcode=state_change.outputcode)
         reveal = SendSecretReveal(
             recipient=recipient,
             recipient_metadata=target_state.transfer.payer_address_metadata,
