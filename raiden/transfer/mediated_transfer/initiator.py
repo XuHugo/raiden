@@ -58,9 +58,9 @@ from raiden.utils.typing import (
     TokenNetworkAddress,
 )
 
-#import structlog
+import structlog
 
-#log = structlog.get_logger(__name__)
+log = structlog.get_logger(__name__)
 
 def calculate_fee_margin(payment_amount: PaymentAmount, estimated_fee: FeeAmount) -> FeeAmount:
     if estimated_fee == 0:
@@ -494,10 +494,9 @@ def handle_offchain_secretreveal(
     )
 
     # todo checkout outputcode
+    log.info("handle_offchain_secretreveal_initiator0===:",outputcode=state_change.outputcode)
     if state_change.outputcode < 99:
-        events = []
-        iteration = TransitionResult(initiator_state, events)
-        return iteration
+        log.info("handle_offchain_secretreveal_initiator1===:",outputcode=state_change.outputcode)
 
     if valid_reveal and is_channel_open and sent_by_partner and not expired:
         events = events_for_unlock_lock(
@@ -508,6 +507,7 @@ def handle_offchain_secretreveal(
             pseudo_random_generator=pseudo_random_generator,
             block_number=block_number,
         )
+        log.info("handle_offchain_secretreveal_initiator2===:",outputcode=state_change.outputcode)
         iteration = TransitionResult(None, events)
     else:
         events = []
@@ -556,7 +556,7 @@ def handle_onchain_secretreveal(
         block_number=block_number,
         lock_expiration_threshold=lock.expiration,
     )
-
+    log.info("handle_onchain_secretreveal_initiator1===:")
     if is_lock_unlocked and is_channel_open and not expired:
         events = events_for_unlock_lock(
             initiator_state,
@@ -566,8 +566,10 @@ def handle_onchain_secretreveal(
             pseudo_random_generator,
             block_number,
         )
+        log.info("handle_onchain_secretreveal_initiator2===:")
         iteration = TransitionResult(None, events)
     else:
+        log.info("handle_onchain_secretreveal_initiator3===:")
         events = []
         iteration = TransitionResult(initiator_state, events)
 
