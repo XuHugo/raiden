@@ -23,6 +23,8 @@ idna==2.8
     # via requests
 imagesize==1.1.0
     # via sphinx
+importlib-metadata==8.5.0
+    # via sphinx
 jinja2==3.0.3
     # via sphinx
 markupsafe==2.0.1
@@ -69,7 +71,7 @@ sphinxcontrib-httpdomain==1.8.0
     # via
     #   -r requirements-docs.in
     #   sphinxcontrib-httpexample
-sphinxcontrib-httpexample==1.0
+sphinxcontrib-httpexample==1.3
     # via -r requirements-docs.in
 sphinxcontrib-images==0.9.4
     # via -r requirements-docs.in
@@ -83,3 +85,5 @@ urllib3==1.26.5
     # via requests
 wheel==0.33.4
     # via astunparse
+zipp==3.21.0
+    # via importlib-metadata
