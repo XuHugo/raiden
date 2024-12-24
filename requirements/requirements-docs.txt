@@ -23,6 +23,8 @@ idna==2.8
     # via requests
 imagesize==1.1.0
     # via sphinx
+importlib-metadata==8.5.0
+    # via sphinx
 jinja2==3.0.3
     # via sphinx
 markupsafe==2.0.1
@@ -35,7 +37,7 @@ pyparsing==2.4.0
     # via packaging
 pytz==2019.1
     # via babel
-releases==1.6.3
+releases==2.1.1
     # via -r requirements-docs.in
 requests==2.27.1
     # via
@@ -83,3 +85,5 @@ urllib3==1.26.5
     # via requests
 wheel==0.33.4
     # via astunparse
+zipp==3.21.0
+    # via importlib-metadata
