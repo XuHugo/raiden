@@ -37,7 +37,7 @@ pyparsing==2.4.0
     # via packaging
 pytz==2019.1
     # via babel
-releases==1.6.3
+releases==2.1.1
     # via -r requirements-docs.in
 requests==2.27.1
     # via
