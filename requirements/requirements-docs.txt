@@ -4,37 +4,37 @@
 #
 #    'requirements/deps compile' (for details see requirements/README)
 #
-alabaster==0.7.12
+alabaster==0.7.16
     # via sphinx
 astunparse==1.6.2
     # via sphinxcontrib-httpexample
-babel==2.9.1
+babel==2.16.0
     # via sphinx
 certifi==2019.3.9
     # via requests
 charset-normalizer==2.0.2
     # via requests
-docutils==0.14
+docutils==0.21.2
     # via
     #   sphinx
     #   sphinx-rtd-theme
     #   sphinxcontrib-httpexample
 idna==2.8
     # via requests
-imagesize==1.1.0
+imagesize==1.4.1
     # via sphinx
-jinja2==3.0.3
+importlib-metadata==8.5.0
+    # via sphinx
+jinja2==3.1.5
     # via sphinx
 markupsafe==2.0.1
     # via jinja2
 packaging==21.3
     # via sphinx
-pygments==2.7.4
+pygments==2.18.0
     # via sphinx
 pyparsing==2.4.0
     # via packaging
-pytz==2019.1
-    # via babel
 releases==1.6.3
     # via -r requirements-docs.in
 requests==2.27.1
@@ -47,9 +47,9 @@ six==1.16.0
     # via
     #   astunparse
     #   sphinxcontrib-httpdomain
-snowballstemmer==1.2.1
+snowballstemmer==2.2.0
     # via sphinx
-sphinx==4.5.0
+sphinx==7.3.7
     # via
     #   -r requirements-docs.in
     #   releases
@@ -57,7 +57,8 @@ sphinx==4.5.0
     #   sphinxcontrib-httpdomain
     #   sphinxcontrib-httpexample
     #   sphinxcontrib-images
-sphinx-rtd-theme==1.0.0
+    #   sphinxcontrib-jquery
+sphinx-rtd-theme==3.0.2
     # via -r requirements-docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -73,13 +74,19 @@ sphinxcontrib-httpexample==1.0
     # via -r requirements-docs.in
 sphinxcontrib-images==0.9.4
     # via -r requirements-docs.in
+sphinxcontrib-jquery==4.1
+    # via sphinx-rtd-theme
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-serializinghtml==2.0.0
+    # via sphinx
+tomli==2.2.1
     # via sphinx
 urllib3==1.26.5
     # via requests
 wheel==0.33.4
     # via astunparse
+zipp==3.21.0
+    # via importlib-metadata
