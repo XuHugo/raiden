@@ -403,6 +403,7 @@ def handle_secretrequest(
     if initiator_state.received_secret_request:
         # A secret request was received earlier, all subsequent are ignored
         # as it might be an attack.
+        log.info("init:handle_secretrequest01===:",outputcode=state_change.outputcode,received_secret_request=initiator_state.received_secret_request)
         return TransitionResult(initiator_state, [])
 
     # transfer_description.amount is the actual payment amount without fees.
@@ -413,7 +414,7 @@ def handle_secretrequest(
         and state_change.expiration == lock.expiration
         and initiator_state.transfer_description.secret != ABSENT_SECRET
     )
-
+    log.info("init:handle_secretrequest02===:",outputcode=state_change.outputcode, is_valid_secretrequest=is_valid_secretrequest)
     if is_valid_secretrequest:
         # Reveal the secret to the target node and wait for its confirmation.
         # At this point the transfer is not cancellable anymore as either the lock
@@ -429,7 +430,7 @@ def handle_secretrequest(
 
         # todo phd: checkout output
         if state_change.outputcode < 99:
-            initiator_state.received_secret_request = True
+            initiator_state.received_secret_request = False
             invalid_request = EventInvalidSecretRequest(
                 payment_identifier=state_change.payment_identifier,
                 intended_amount=initiator_state.transfer_description.amount,
