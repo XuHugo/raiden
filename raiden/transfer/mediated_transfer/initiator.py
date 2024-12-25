@@ -493,8 +493,8 @@ def handle_offchain_secretreveal(
 
     # todo checkout outputcode
     log.info("handle_offchain_secretreveal_initiator0===:",outputcode=state_change.outputcode)
-    if state_change.outputcode < 99:
-        log.info("handle_offchain_secretreveal_initiator1===:",outputcode=state_change.outputcode)
+    #if state_change.outputcode < 99:
+    #    log.info("handle_offchain_secretreveal_initiator1===:",outputcode=state_change.outputcode)
 
     if valid_reveal and is_channel_open and sent_by_partner and not expired:
         events = events_for_unlock_lock(
