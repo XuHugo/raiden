@@ -132,10 +132,7 @@ def handle_inittarget(
             #todo return outputcode
             inputcode = transfer.inputcode
             outputcode = inputcode
-            # log.debug(
-            #     "target receive inputcode and return!",
-            #     inputcode,
-            # )
+            log.info("handle_inittarget===:target receive inputcode and return!",outputcode=inputcode)
             
             secret_request = SendSecretRequest(
                 recipient=Address(recipient),
@@ -196,7 +193,7 @@ def handle_offchain_secretreveal(
         recipient = from_hop.node_address
 
         #todo inputcode=outputcode
-        log.info("handle_offchain_secretreveal1===:",outputcode=state_change.outputcode)
+        log.info("target:handle_offchain_secretreveal1===:",outputcode=state_change.outputcode)
         reveal = SendSecretReveal(
             recipient=recipient,
             recipient_metadata=target_state.transfer.payer_address_metadata,

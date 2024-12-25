@@ -116,8 +116,8 @@ class Metadata:
             event.transfer.lock.amount,
             event.transfer.payment_identifier,
         )
-
-        return cls(routes=routes, _original_data=transfer.metadata, secret=encrypted_secret)
+        #return cls(routes=routes, _original_data=transfer.metadata, secret=encrypted_secret)
+        return cls(routes=routes, _original_data=transfer.metadata)
 
     @cached_property
     def hash(self) -> MetadataHash:

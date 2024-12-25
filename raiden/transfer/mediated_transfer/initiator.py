@@ -428,18 +428,16 @@ def handle_secretrequest(
         # recipient_metadata = initiator_state.route.address_metadata.get(recipient, None)
 
         # todo phd: checkout output
-        if state_change.outputcode >= 99:
+        if state_change.outputcode < 99:
             initiator_state.received_secret_request = True
             invalid_request = EventInvalidSecretRequest(
                 payment_identifier=state_change.payment_identifier,
                 intended_amount=initiator_state.transfer_description.amount,
                 actual_amount=state_change.amount,
             )
+            log.info("init:handle_secretrequest0===:",outputcode=state_change.outputcode)
             return TransitionResult(initiator_state, [invalid_request])
-        # log.error(
-        #         "init receive outputcode and verification!",
-        #         state_change.outputcode,
-        #     )
+        log.info("init:handle_secretrequest1===:",outputcode=state_change.outputcode)
     
         recipient_metadata = get_address_metadata(recipient, [initiator_state.route])
         revealsecret = SendSecretReveal(
