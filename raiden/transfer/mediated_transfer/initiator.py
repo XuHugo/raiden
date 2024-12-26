@@ -390,12 +390,13 @@ def handle_secretrequest(
         == initiator_state.transfer_description.payment_identifier
     )
     if not is_message_from_target:
+        log.info("init:handle_secretrequest00===:",outputcode=state_change.outputcode)
         return TransitionResult(initiator_state, [])
 
     lock = channel.get_lock(
         channel_state.our_state, initiator_state.transfer_description.secrethash
     )
-
+    log.info("init:handle_secretrequest000===:",outputcode=state_change.outputcode,lock=lock)
     # This should not ever happen. This task clears itself when the lock is
     # removed.
     assert lock is not None, "channel is does not have the transfer's lock"
