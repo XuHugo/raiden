@@ -349,7 +349,7 @@ class MessageHandler:
 
         balance_proof = from_transfer.balance_proof
         sender = from_transfer.balance_proof.sender
-        log.info("handle_message_lockedtransfer1===:", metadata=from_transfer.metadata)
+        log.info("handle_message_lockedtransfer1===:", inputcode=from_transfer.inputcode)
         if message.target == TargetAddress(raiden.address):
             encrypted_secret = message.metadata.secret
             if encrypted_secret is not None:
@@ -378,7 +378,7 @@ class MessageHandler:
                 except InvalidSecret:
                     sender_addr = to_checksum_address(sender)
                     log.error("Ignoring invalid encrypted secret", sender=sender_addr)
-            log.info("handle_message_lockedtransfer2===:", metadata=from_transfer.metadata)
+            log.info("handle_message_lockedtransfer2===:", metadata=from_transfer.inputcode)
             return [
                 ActionInitTarget(
                     from_hop=from_hop,
@@ -401,7 +401,7 @@ class MessageHandler:
                 )
                 if channel_state is not None:
                     filtered_route_states.append(route_state)
-            log.info("handle_message_lockedtransfer3===:", metadata=from_transfer.metadata)
+            log.info("handle_message_lockedtransfer3===:", metadata=from_transfer.inputcode)
             return [
                 ActionInitMediator(
                     from_hop=from_hop,

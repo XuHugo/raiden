@@ -37,7 +37,8 @@ from raiden.utils.typing import (
     TokenNetworkAddress,
     cast,
 )
-
+import structlog
+log = structlog.get_logger(__name__)
 
 def clear_if_finalized(
     iteration: TransitionResult,
@@ -115,6 +116,7 @@ def subdispatch_to_initiatortransfer(
     channel_identifier = initiator_state.channel_identifier
     channel_state = channelidentifiers_to_channels.get(channel_identifier)
     if not channel_state:
+        log.info("subdispatch_to_initiatortransfer0===:")
         return TransitionResult(initiator_state, [])
 
     sub_iteration = initiator.state_transition(
@@ -456,9 +458,11 @@ def handle_secretrequest(
     initiator_state = payment_state.initiator_transfers.get(state_change.secrethash)
 
     if not initiator_state:
+        log.info("handle_secretrequest0===:", outputcode=state_change.outputcode)
         return TransitionResult(payment_state, [])
 
     if initiator_state.transfer_state == "transfer_cancelled":
+        log.info("handle_secretrequest1===:", outputcode=state_change.outputcode)
         return TransitionResult(payment_state, [])
 
     sub_iteration = subdispatch_to_initiatortransfer(
@@ -523,7 +527,9 @@ def state_transition(
         )
     elif type(state_change) == ReceiveSecretRequest:
         assert isinstance(state_change, ReceiveSecretRequest), MYPY_ANNOTATION
+        log.info("init_manager:state_transition:secretrequest0===:", outputcode=state_change.outputcode)
         assert payment_state, "ReceiveSecretRequest should be accompanied by a valid payment state"
+        log.info("init_manager:state_transition:secretrequest1===:", outputcode=state_change.outputcode)
         iteration = handle_secretrequest(
             payment_state=payment_state,
             state_change=state_change,
