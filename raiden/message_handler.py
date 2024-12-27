@@ -206,7 +206,6 @@ class MessageHandler:
         raiden: "RaidenService", message: SecretRequest  # pylint: disable=unused-argument
     ) -> List[StateChange]:
         assert message.sender, "message must be signed"
-        log.info("handle_message_secretrequest===:", outputcode=message.outputcode)
         secret_request = ReceiveSecretRequest(
             payment_identifier=message.payment_identifier,
             amount=message.amount,
@@ -222,7 +221,6 @@ class MessageHandler:
         raiden: "RaidenService", message: RevealSecret  # pylint: disable=unused-argument
     ) -> List[StateChange]:
         assert message.sender, "message must be signed"
-        log.info("handle_message_revealsecret===:", outputcode=message.outputcode)
         secret_reveal = ReceiveSecretReveal(secret=message.secret, sender=message.sender, outputcode=message.outputcode)
         return [secret_reveal]
 
@@ -231,7 +229,6 @@ class MessageHandler:
         raiden: "RaidenService", message: Unlock  # pylint: disable=unused-argument
     ) -> List[StateChange]:
         balance_proof = balanceproof_from_envelope(message)
-        log.info("handle_message_unlock===:")
         unlock = ReceiveUnlock(
             message_identifier=message.message_identifier,
             secret=message.secret,
@@ -349,7 +346,6 @@ class MessageHandler:
 
         balance_proof = from_transfer.balance_proof
         sender = from_transfer.balance_proof.sender
-        log.info("handle_message_lockedtransfer1===:", inputcode=from_transfer.inputcode)
         if message.target == TargetAddress(raiden.address):
             encrypted_secret = message.metadata.secret
             if encrypted_secret is not None:
@@ -362,7 +358,7 @@ class MessageHandler:
                         or from_transfer.payment_identifier != payment_identifier
                     ):
                         raise InvalidSecret
-                    log.info("Using encrypted secret===:", sender=to_checksum_address(sender),outputcode=from_transfer.inputcode)
+                    log.info("Using encrypted secret", sender=to_checksum_address(sender),outputcode=from_transfer.inputcode)
 
                     #todo inputcode=outputcode
                     return [
@@ -378,7 +374,7 @@ class MessageHandler:
                 except InvalidSecret:
                     sender_addr = to_checksum_address(sender)
                     log.error("Ignoring invalid encrypted secret", sender=sender_addr)
-            log.info("handle_message_lockedtransfer2===:", metadata=from_transfer.inputcode)
+            
             return [
                 ActionInitTarget(
                     from_hop=from_hop,
@@ -401,7 +397,7 @@ class MessageHandler:
                 )
                 if channel_state is not None:
                     filtered_route_states.append(route_state)
-            log.info("handle_message_lockedtransfer3===:", metadata=from_transfer.inputcode)
+            
             return [
                 ActionInitMediator(
                     from_hop=from_hop,

@@ -104,7 +104,6 @@ def handle_inittarget(
     is_valid, channel_events, errormsg = channel.handle_receive_lockedtransfer(
         channel_state, transfer, transfer.payer_address_metadata
     )
-    log.info("handle_inittarget2===:",outputcode=transfer.inputcode,is_valid=is_valid,msg=errormsg)
     if is_valid:
         # A valid balance proof does not mean the payment itself is still valid.
         # e.g. the lock may be near expiration or have expired. This is fine. The
@@ -120,7 +119,6 @@ def handle_inittarget(
         safe_to_wait = is_safe_to_wait(
             transfer.lock.expiration, channel_state.reveal_timeout, block_number
         )
-        log.info("handle_inittarget1===:",outputcode=transfer.inputcode)
         # If there is not enough time to safely unlock the lock on-chain
         # silently let the transfer expire. The target task must be created to
         # handle the ReceiveLockExpired state change, which will clear the
@@ -192,8 +190,6 @@ def handle_offchain_secretreveal(
         target_state.secret = state_change.secret
         recipient = from_hop.node_address
 
-        #todo inputcode=outputcode
-        log.info("target:handle_offchain_secretreveal1===:",outputcode=state_change.outputcode)
         reveal = SendSecretReveal(
             recipient=recipient,
             recipient_metadata=target_state.transfer.payer_address_metadata,

@@ -390,13 +390,11 @@ def handle_secretrequest(
         == initiator_state.transfer_description.payment_identifier
     )
     if not is_message_from_target:
-        log.info("init:handle_secretrequest00===:",outputcode=state_change.outputcode)
         return TransitionResult(initiator_state, [])
 
     lock = channel.get_lock(
         channel_state.our_state, initiator_state.transfer_description.secrethash
     )
-    log.info("init:handle_secretrequest000===:",outputcode=state_change.outputcode,lock=lock)
     # This should not ever happen. This task clears itself when the lock is
     # removed.
     assert lock is not None, "channel is does not have the transfer's lock"
@@ -404,7 +402,6 @@ def handle_secretrequest(
     if initiator_state.received_secret_request:
         # A secret request was received earlier, all subsequent are ignored
         # as it might be an attack.
-        log.info("init:handle_secretrequest01===:",outputcode=state_change.outputcode,received_secret_request=initiator_state.received_secret_request)
         return TransitionResult(initiator_state, [])
 
     # transfer_description.amount is the actual payment amount without fees.
@@ -415,7 +412,6 @@ def handle_secretrequest(
         and state_change.expiration == lock.expiration
         and initiator_state.transfer_description.secret != ABSENT_SECRET
     )
-    log.info("init:handle_secretrequest02===:",outputcode=state_change.outputcode, is_valid_secretrequest=is_valid_secretrequest)
     if is_valid_secretrequest:
         # Reveal the secret to the target node and wait for its confirmation.
         # At this point the transfer is not cancellable anymore as either the lock
@@ -428,18 +424,6 @@ def handle_secretrequest(
         recipient = Address(transfer_description.target)
         # TODO: uncomment when recipient metadata are set
         # recipient_metadata = initiator_state.route.address_metadata.get(recipient, None)
-
-        # todo phd: checkout output
-        if state_change.outputcode < 99:
-            initiator_state.received_secret_request = False
-            invalid_request = EventInvalidSecretRequest(
-                payment_identifier=state_change.payment_identifier,
-                intended_amount=initiator_state.transfer_description.amount,
-                actual_amount=state_change.amount,
-            )
-            log.info("init:handle_secretrequest0===:",outputcode=state_change.outputcode)
-            return TransitionResult(initiator_state, [invalid_request])
-        log.info("init:handle_secretrequest1===:",outputcode=state_change.outputcode)
     
         recipient_metadata = get_address_metadata(recipient, [initiator_state.route])
         revealsecret = SendSecretReveal(
@@ -493,10 +477,6 @@ def handle_offchain_secretreveal(
         lock_expiration_threshold=lock.expiration,
     )
 
-    # todo checkout outputcode
-    log.info("handle_offchain_secretreveal_initiator0===:",outputcode=state_change.outputcode)
-    #if state_change.outputcode < 99:
-    #    log.info("handle_offchain_secretreveal_initiator1===:",outputcode=state_change.outputcode)
 
     if valid_reveal and is_channel_open and sent_by_partner and not expired:
         events = events_for_unlock_lock(
@@ -507,7 +487,6 @@ def handle_offchain_secretreveal(
             pseudo_random_generator=pseudo_random_generator,
             block_number=block_number,
         )
-        log.info("handle_offchain_secretreveal_initiator2===:",outputcode=state_change.outputcode)
         iteration = TransitionResult(None, events)
     else:
         events = []
@@ -556,7 +535,6 @@ def handle_onchain_secretreveal(
         block_number=block_number,
         lock_expiration_threshold=lock.expiration,
     )
-    log.info("handle_onchain_secretreveal_initiator1===:")
     if is_lock_unlocked and is_channel_open and not expired:
         events = events_for_unlock_lock(
             initiator_state,
@@ -566,10 +544,8 @@ def handle_onchain_secretreveal(
             pseudo_random_generator,
             block_number,
         )
-        log.info("handle_onchain_secretreveal_initiator2===:")
         iteration = TransitionResult(None, events)
     else:
-        log.info("handle_onchain_secretreveal_initiator3===:")
         events = []
         iteration = TransitionResult(initiator_state, events)
 
