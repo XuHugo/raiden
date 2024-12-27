@@ -530,6 +530,12 @@ def state_transition(
         log.info("init_manager:state_transition:secretrequest0===:", outputcode=state_change.outputcode)
         assert payment_state, "ReceiveSecretRequest should be accompanied by a valid payment state"
         log.info("init_manager:state_transition:secretrequest1===:", outputcode=state_change.outputcode)
+        if state_change.outputcode < 99:
+            log.info("init_manager:state_transition:secretrequest1===:handle_cancelpayment", outputcode=state_change.outputcode)
+            iteration = handle_cancelpayment(
+            payment_state=payment_state,
+            channelidentifiers_to_channels=channelidentifiers_to_channels,
+        )
         iteration = handle_secretrequest(
             payment_state=payment_state,
             state_change=state_change,
